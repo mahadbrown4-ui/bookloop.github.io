@@ -1,0 +1,51 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookLoop - Read, Review, Earn</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>BookLoop</h1>
+            <p>Read Books. Write Summaries. Earn Money.</p>
+            <nav>
+                <button onclick="filterCategory('all')">All Books</button>
+                <button onclick="filterCategory('Fiction')">Fiction</button>
+                <button onclick="filterCategory('Cooking')">Cooking</button>
+                <button onclick="filterCategory('Coloring')">Coloring</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="search-section">
+            <input type="text" id="barcodeInput" placeholder="Scan Barcode or Search Title..." onkeyup="searchBooks()">
+            <div class="auth-options">
+                <span>Sign in with:</span>
+                <button class="btn-sm">Gmail</button>
+                <button class="btn-sm">iCloud</button>
+                <button class="btn-sm">Email</button>
+            </div>
+        </section>
+
+        <section id="book-grid" class="grid">
+            <!-- Books will be injected here by JavaScript -->
+        </section>
+    </main>
+
+    <div id="summary-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title">Write a Summary</h2>
+            <p id="modal-barcode"></p>
+            <textarea id="summary-text" placeholder="Write your summary here to earn credits..."></textarea>
+            <button class="btn-submit" onclick="submitSummary()">Submit & Earn</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
