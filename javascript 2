@@ -1,6 +1,0 @@
-// Clerk Configuration
-const clerkPubKey = 'sb_publishable_RMesAsFoVDMIgOyOxulzlQ_Gt2foYq-';
-
-// Supabase Configuration 
-const supabaseUrl = 'https://xqtiznbeyhxmbqabvava.supabase.co';
-const supabaseKey = 'YOUR_SUPABASE_ANON_KEY'; // You still need this from the Supabase API settings
