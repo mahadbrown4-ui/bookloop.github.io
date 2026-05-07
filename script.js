@@ -3,8 +3,8 @@
  * Replace the placeholders below with your actual Project credentials
  * found in: Supabase Dashboard > Settings > API
  */
-const _supabaseUrl = 'https://your-project-id.supabase.co';
-const _supabaseKey = 'your-anon-public-key';
+const _supabaseUrl = https://xqtiznbeyhxmbqabvava.supabase.co
+const _supabaseKey = sb_publishable_RMesAsFoVDMIgOyOxulzlQ_Gt2foYq-
 const supabase = lib.createClient(_supabaseUrl, _supabaseKey);
 
 let currentCategory = 'all';
