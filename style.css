@@ -1,156 +1,416 @@
+/* Custom variables for UI theme consistency */
 :root {
-    --primary: #2c3e50;
-    --accent: #27ae60;
-    --light: #f4f7f6;
-    --dark: #333;
-    --white: #ffffff;
+    --primary-color: #2b5c8f;
+    --primary-hover: #1e4366;
+    --accent-reward: #10b981;
+    --accent-reward-hover: #059669;
+    --bg-app: #f4f6f9;
+    --bg-card: #ffffff;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --border-color: #e5e7eb;
+    --error-color: #ef4444;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05);
+    --radius-md: 8px;
+    --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    background-color: var(--light);
-    color: var(--dark);
+    font-family: var(--font-family);
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    line-height: 1.5;
+    padding-bottom: 40px;
 }
 
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
+/* Header Component Styles */
+.app-header {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    font-size: 24px;
+}
+
+.app-header h1 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.auth-status-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-email {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* Master Grid Containment Architecture */
+.app-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 16px;
+}
+
+/* Card Design Engine */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.badge {
+    background-color: #e6f7f0;
+    color: var(--accent-reward);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Metrics Performance Summary Overview */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    text-align: center;
     padding: 20px;
 }
 
-header {
-    background-color: var(--primary);
-    color: var(--white);
-    text-align: center;
-    padding: 40px 0;
+.accent-reward {
+    border-top: 4px solid var(--accent-reward);
 }
 
-nav {
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 8px 0;
+    color: var(--primary-color);
+}
+
+.stat-card.accent-reward .stat-value {
+    color: var(--accent-reward);
+}
+
+.stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Columnar Layout Design Split */
+.workspace-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 24px;
+}
+
+@media (max-width: 768px) {
+    .workspace-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Verification Context Box */
+.auth-card {
+    max-width: 450px;
+    margin: 60px auto;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    margin-bottom: 20px;
+}
+
+/* Semantic Form Elements System */
+.form-group {
+    text-align: left;
+}
+
+.input-field {
+    margin-bottom: 16px;
+}
+
+.input-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.input-row .input-field {
+    flex: 1;
+    margin-bottom: 16px;
+}
+
+.input-field-action {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text-main);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Button Component Library Elements */
+.btn {
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+.btn-secondary:hover {
+    background-color: #e5e7eb;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+}
+
+.btn-outline:hover {
+    background-color: #f9fafb;
+    border-color: #9ca3af;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.auth-actions {
+    display: flex;
+    gap: 10px;
     margin-top: 20px;
 }
 
-nav button {
-    background: transparent;
-    border: 2px solid var(--white);
-    color: var(--white);
-    padding: 8px 16px;
-    margin: 5px;
-    cursor: pointer;
-    border-radius: 20px;
-    transition: 0.3s;
+.auth-actions .btn {
+    flex: 1;
 }
 
-nav button:hover {
-    background: var(--white);
-    color: var(--primary);
-}
-
-#search-section {
-    margin: 30px 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content:空间之间;
-    align-items: center;
-    gap: 15px;
-}
-
-#barcodeInput {
-    flex-grow: 1;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-.auth-options {
-    font-size: 0.9em;
-}
-
-.btn-sm {
-    padding: 5px 10px;
-    margin-left: 5px;
-    cursor: pointer;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 25px;
-}
-
-.book-card {
-    background: var(--white);
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+/* Single Sign On Divider UI Pattern */
+.auth-divider {
+    margin: 20px 0;
+    position: relative;
     text-align: center;
-    transition: transform 0.2s;
 }
 
-.book-card:hover {
-    transform: translateY(-5px);
-}
-
-.book-card img {
-    max-width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 4px;
-}
-
-.barcode-label {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.8em;
-    color: #777;
-    display: block;
-    margin: 10px 0;
-}
-
-.btn-action {
-    background-color: var(--accent);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-}
-
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 100;
+.auth-divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
     left: 0;
-    top: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    z-index: 1;
+}
+
+.auth-divider span {
+    background-color: var(--bg-card);
+    padding: 0 10px;
+    font-size: 12px;
+    color: var(--text-muted);
+    position: relative;
+    z-index: 2;
+}
+
+.btn-oauth {
     width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: white;
+    border: 1px solid #d1d5db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #374151;
 }
 
-.modal-content {
-    background-color: var(--white);
-    margin: 10% auto;
-    padding: 30px;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 10px;
+.btn-oauth img {
+    width: 16px;
+    height: 16px;
 }
 
-textarea {
-    width: 100%;
-    height: 150px;
-    margin: 15px 0;
-    padding: 10px;
-    box-sizing: border-box;
+/* Dynamic Filter Wrapper Controls */
+.search-filter-box {
+    background-color: #f9fafb;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    margin-bottom: 16px;
+    border: 1px solid var(--border-color);
 }
 
-.btn-submit {
-    background: var(--primary);
+.filter-row {
+    display: flex;
+    gap: 10px;
+}
+
+/* Asynchronous Rendered Cards Content Mapping */
+.scholarship-container-list {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.scholarship-item-card {
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 14px;
+    margin-bottom: 10px;
+    background-color: white;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.scholarship-item-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.sch-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--primary-color);
+}
+
+.sch-amount {
+    color: var(--accent-reward);
+}
+
+.sch-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.sch-desc {
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.data-placeholder {
+    text-align: center;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 30px 0;
+}
+
+/* Local Ledger Rendering Elements */
+.log-item {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+.log-item:last-child {
+    border-bottom: none;
+}
+.log-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 14px;
+}
+.log-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* System Dialog Feedbacks (Toasts) */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #333;
     color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    z-index: 1000;
+    font-size: 14px;
 }
+
+.toast.error { background-color: var(--error-color); }
+.toast.success { background-color: var(--accent-reward); }
+
+/* Utility Classes */
+.hidden { display: none !important; }
