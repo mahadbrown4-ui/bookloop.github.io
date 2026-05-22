@@ -1,0 +1,1 @@
+<form onSubmit="handleSignIn(event, emailInput.value, passwordInput.value)">
