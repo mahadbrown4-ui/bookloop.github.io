@@ -1,0 +1,57 @@
+// Sign In Feature
+async function handleSignIn(e, email, password) {
+  // Prevent the browser from reloading the page on form submission
+  if (e && typeof e.preventDefault === 'function') e.preventDefault();
+
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+    
+    if (error) {
+      console.error("Login failed:", error.message);
+      alert(`Login failed: ${error.message}`);
+      return;
+    }
+
+    // Success: Redirect to Hub dashboard
+    window.location.href = "/dashboard";
+
+  } catch (err) {
+    console.error("Network or structural error during sign-in:", err);
+    alert("An unexpected error occurred. Please check your connection and try again.");
+  }
+}
+
+// Create Account Feature
+async function handleSignUp(e, email, password, fullName) {
+  if (e && typeof e.preventDefault === 'function') e.preventDefault();
+
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: { full_name: fullName }
+      }
+    });
+
+    if (error) {
+      alert(`Account creation failed: ${error.message}`);
+      return;
+    }
+
+    // Success logic depends on your Supabase project settings:
+    if (data?.user && data.user.identities?.length === 0) {
+      alert("This email is already registered. Please try signing in instead.");
+    } else {
+      alert("Check your email for the confirmation link!");
+      window.location.href = "/login"; // Send them to login while they wait for the email
+    }
+
+  } catch (err) {
+    console.error("Network or structural error during sign-up:", err);
+    alert("Could not connect to the registration server. Please try again later.");
+  }
+}
