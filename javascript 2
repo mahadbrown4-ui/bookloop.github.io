@@ -1,0 +1,85 @@
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = 'https://your-project-url.supabase.co'
+const supabaseKey = 'your-anonymous-public-key'
+export const supabase = createClient(supabaseUrl, supabaseKey) // Sign In Feature
+async function handleSignIn(email, password) {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: email,
+    password: password,
+  })
+  
+  if (error) {
+    console.error("Login failed:", error.message)
+    alert(error.message)
+  } else {
+    window.location.href = "/dashboard" // Redirect to Hub dashboard
+  }
+}
+
+// Create Account Feature
+async function handleSignUp(email, password, fullName) {
+  const { data, error } = await supabase.auth.signUp({
+    email: email,
+    password: password,
+    options: {
+      data: { full_name: fullName }
+    }
+  })
+
+  if (error) alert(error.message)
+  else alert("Check your email for the confirmation link!")
+}// Get all books sorted from A to Z
+async function getBooksAlphabetical(categoryFilter = null) {
+  let query = supabase
+    .from('books')
+    .select('*')
+    .order('title', { ascending: true }) // <--- Keeps it A to Z
+
+  // Optional filtering for categories
+  if (categoryFilter) {
+    query = query.eq('category', categoryFilter)
+  }
+
+  const { data, error } = await query
+  if (error) console.error(error)
+  return data
+}
+
+// Example usage: getBooksAlphabetical('cooking') 
+// Example usage: getBooksAlphabetical('adult_coloring')async function gradeSubmission(submissionId, userId, scorePercentage, statusText, adminNotes) {
+  // 1. Update the submission grade status
+  const { error: submissionError } = await supabase
+    .from('submissions')
+    .update({ 
+      quiz_score_percentage: scorePercentage,
+      status: statusText,
+      admin_notes: adminNotes
+    })
+    .eq('id', submissionId)
+
+  if (submissionError) return console.error(submissionError)
+
+  // 2. If score is 70% or higher and approved, trigger the $0.50 payout
+  if (scorePercentage >= 70 && statusText === 'approved') {
+    
+    // Fetch user's current balance
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('balance, membership_tier')
+      .eq('id', userId)
+      .single()
+
+    // Ensure they have an active paid membership before paying them
+    if (profile && profile.membership_tier !== 'free') {
+      const newBalance = parseFloat(profile.balance) + 0.50
+
+      await supabase
+        .from('profiles')
+        .update({ balance: newBalance })
+        .eq('id', userId)
+        
+      alert(`Submission graded! User rewarded $0.50. New Balance: $${newBalance}`)
+    }
+  }
+}
